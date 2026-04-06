@@ -1,7 +1,32 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f2f2f2;
+    transition: background 0.4s ease;
+}
+
+body.default-weather {
+    background: #f2f2f2;
+}
+
+body.sunny {
+    background: linear-gradient(135deg, #fff3b0, #ffd36e);
+}
+
+body.cloudy {
+    background: linear-gradient(135deg, #dfe9f3, #c3cfe2);
+}
+
+body.rainy {
+    background: linear-gradient(135deg, #8fa3bf, #61748c);
+}
+
+body.snowy {
+    background: linear-gradient(135deg, #f7fbff, #dbe9f4);
+}
+
+body.stormy {
+    background: linear-gradient(135deg, #4b5563, #1f2937);
 }
 
 .weather-container {
@@ -24,6 +49,7 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 6px;
     margin-right: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 
 #search-btn {
@@ -33,6 +59,7 @@ h1 {
     color: white;
     border-radius: 6px;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
 }
 
 #search-btn:hover {
@@ -49,6 +76,7 @@ h1 {
 
 #weather-result h2 {
     margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 
 #weather-result img {
@@ -58,4 +86,87 @@ h1 {
 
 #weather-result p {
     margin: 8px 0;
+}
+
+.weather-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weather-card h2 {
+  margin-bottom: 10px;
+}
+
+.weather-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather-main p {
+  margin: 4px 0;
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.description {
+  color: #777;
+  font-size: 1rem;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  
+  h1 {
+    font-size: 1.7rem;
+  }
+  
+  .weather-container {
+    margin: 30px 16px;
+    padding: 24px 18px;
+  }
+
+  #city-input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+
+  #search-btn {
+    width: 100%;
+  }
+  
+  #weather-result {
+    padding: 16px;
+    min-height: auto;
+  }
+
+  .temperature {
+    font-size: 2.2rem;
+  }
 }
