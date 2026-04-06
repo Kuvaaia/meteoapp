@@ -39,6 +39,19 @@ body.stormy {
     text-align: center;
 }
 
+.portfolio-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #666;
+}
+
+.portfolio-link:hover {
+  color: #000;
+}
+
 h1 {
     margin-bottom: 20px;
 }
@@ -148,6 +161,13 @@ h1 {
   .weather-container {
     margin: 30px 16px;
     padding: 24px 18px;
+  }
+
+  .portfolio-link {
+    position: static;
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.95 rem;
   }
 
   #city-input {
