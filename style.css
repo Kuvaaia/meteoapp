@@ -37,19 +37,22 @@ body.stormy {
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+    position: relative;
 }
 
 .portfolio-link {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   font-size: 0.85rem;
   text-decoration: none;
   color: #666;
+  transition: 0.2s ease;
 }
 
 .portfolio-link:hover {
   color: #000;
+  transform: translateY(-1px);
 }
 
 h1 {
@@ -65,6 +68,12 @@ h1 {
     font-family: 'Poppins', sans-serif;
 }
 
+#city-input:focus {
+  outline: none;
+  border-color: darkgreen;
+  box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.12);
+}
+
 #search-btn {
     padding: 10px 15px;
     border: none;
@@ -73,17 +82,19 @@ h1 {
     border-radius: 6px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 #search-btn:hover {
     background-color: green;
+    transform: translateY(-1px);
 }
 
 #weather-result {
     margin-top: 25px;
-    padding: 20px;
+    padding: 0;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: transparent;
     min-height: 80px;
 }
 
@@ -167,7 +178,7 @@ h1 {
     position: static;
     display: block;
     margin-bottom: 12px;
-    font-size: 0.95 rem;
+    font-size: 0.95rem;
   }
 
   #city-input {

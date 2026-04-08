@@ -2,6 +2,11 @@ const cityInput = document.getElementById("city-input");
 const searchBtn = document.getElementById("search-btn");
 const weatherResult = document.getElementById("weather-result");
 
+const lastCity = localStorage.getItem("lastCity");
+if (lastCity) {
+    getWeather(lastCity);
+}
+
 searchBtn.addEventListener("click", function () {
     const city = cityInput.value.trim();
 
@@ -13,7 +18,7 @@ searchBtn.addEventListener("click", function () {
     getWeather(city);
 });
 
-cityInput.addEventListener("keypress", function (e) {
+cityInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
         searchBtn.click();
     }
@@ -46,19 +51,24 @@ async function getWeather(city) {
 
         const weatherData = await weatherResponse.json();
 
+        if (!weatherData.current) {
+            weatherResult.innerHTML = "<p>Données météo indisponibles.</p>";
+            return;
+        }
+
         const temperature = Math.round(weatherData.current.temperature_2m);
         const weatherCode = weatherData.current.weather_code;
-        const wind = weatherData.current.wind_speed_10m;
-        const humidity = weatherData.current.relative_humidity_2m;
+        const wind = weatherData.current.wind_speed_10m ?? "N/A";
+        const humidity = weatherData.current.relative_humidity_2m ?? "N/A";
         const description = getWeatherDescription(weatherCode);
         const icon = getWeatherIcon(weatherCode);
 
         updateWeatherTheme(weatherCode);
+        localStorage.setItem("lastCity", cityName);
 
         weatherResult.innerHTML = `
             <div class="weather-card">
                 <h2>${cityName}, ${country}</h2>
-
                 <div class="weather-main">
                     <p style="font-size: 40px;">${icon}</p>
                     <p class="temperature">${temperature}°C</p>
@@ -68,7 +78,11 @@ async function getWeather(city) {
                 </div>
             </div>
         `;
+
+        cityInput.value = "";
+        cityInput.focus();
     } catch (error) {
+        console.error("Erreur météo :", error);
         weatherResult.innerHTML = "<p>Une erreur est survenue.</p>";
     }
 }
@@ -88,8 +102,10 @@ function getWeatherDescription(code) {
 function getWeatherIcon(code) {
     if (code === 0) return "☀️";
     if ([1, 2, 3].includes(code)) return "⛅";
-    if ([61, 63, 65].includes(code)) return "🌧️";
-    if ([71, 73, 75].includes(code)) return "❄️";
+    if ([45, 48].includes(code)) return "🌫️";
+    if ([51, 53, 55, 56, 57].includes(code)) return "🌦️";
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "🌧️";
+    if ([71, 73, 75, 77].includes(code)) return "❄️";
     if ([95, 96, 99].includes(code)) return "⛈️";
     return "🌡️";
 }
